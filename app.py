@@ -1,17 +1,14 @@
 import streamlit as st
-import pandas as pd
-from google.cloud import storage
-from st_files_connection import FilesConnection
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from streamlit_gsheets import GSheetsConnection
+import json
 
-st.write("hello world")
-# Create a connection object.
-conn = st.connection("gsheets", type=GSheetsConnection)
+# Load credentials from secrets
+creds_dict = st.secrets["google"]
+creds_json = json.dumps(creds_dict)
 
-df = conn.read()
+# Define the scope
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
-# Print results.
-for row in df.itertuples():
-    st.write(f"{row.name} has a :{row.pet}:")
+# Add credentials to the account
+creds = ServiceAccountCredentials.from_json_keyfile_dict(json.loads(creds_json), scope)
