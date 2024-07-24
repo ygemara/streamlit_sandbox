@@ -1,31 +1,24 @@
 import streamlit as st
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from streamlit_gsheets import GSheetsConnection
 
-# Define the scope
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+# Create a connection object.
+conn = st.connection("gsheets", type=GSheetsConnection)
 
-# Add credentials to the account
-creds = ServiceAccountCredentials.from_json_keyfile_name('path_to_your_credentials.json', scope)
+# Read data from the Google Sheet.
+df = conn.read()
 
-# Authorize the clientsheet 
-client = gspread.authorize(creds)
-
-# Open the Google Sheet
-sheet = client.open("Your Sheet Name").sheet1
-
-# Function to append data to Google Sheet
-def append_to_gsheet(values):
-    sheet.append_row(values)
-
-# Read data from the Google Sheet
-data = sheet.get_all_records()
-
-# Display the data in Streamlit
-st.write(data)
+# Display the data in Streamlit.
+st.write(df)
 
 # Append a new row (example data)
 new_row = ["value1", "value2", "value3"]
-append_to_gsheet(new_row)
 
-st.success("Data appended successfully!")
+# Function to append data to Google Sheet
+def append_to_gsheet(connection, values):
+    sheet = connection.get_worksheet(0)  # assuming you want to write to the first sheet
+    sheet.append_row(values)
+
+# Button to trigger the append function
+if st.button('Append new row'):
+    append_to_gsheet(conn, new_row)
+    st.success("Data appended successfully!")
