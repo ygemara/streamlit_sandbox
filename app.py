@@ -23,7 +23,7 @@ csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
 database_df = pd.read_csv(csv_url, on_bad_lines='skip')
 
 # Display the DataFrame in the Streamlit app
-st.write(database_df)
+st.write("hello")
 
 # Uncomment the following lines if you want to update the Google Sheet with the DataFrame content
 # sheet_url = st.secrets["private_gsheets_url"]  # Ensure this secret is set in Streamlit secrets
