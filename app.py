@@ -27,7 +27,7 @@ st.write(database_df)
 # Read the Google Sheets URL from Streamlit secrets
 sheet_url = st.secrets["private_gsheets_url"]  # Ensure this secret is set in Streamlit secrets
 
-sheet = client.open_by_url(csv_url)
+sheet = client.open_by_key(sheet_id)
 st.write(sheet)
 worksheet = sheet.worksheet("Sheet1")  # Access the first sheet by name
 worksheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
