@@ -4,7 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 
 # Load credentials from secrets
-creds_dict = st.secrets["google"]
+creds_dict = st.secrets["connections.gsheets"]
 creds_json = json.dumps(creds_dict)
 
 # Define the scope
