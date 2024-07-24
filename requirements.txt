@@ -6,3 +6,5 @@ google-cloud
 google-cloud-bigquery
 pandas
 datetime
+gcsfs
+st-files-connection
