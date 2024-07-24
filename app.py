@@ -7,34 +7,27 @@ st.write("Hello World")
 project_id = "applied-groove-420014"
 bucket_name = "streamlit_bucket_yg"
 
-# Assuming you're using Streamlit secrets to store the key
-def get_credentials():
-    import os
-    from google.oauth2 import service_account
+# # Assuming you're using Streamlit secrets to store the key
+# def get_credentials():
+#     import os
+#     from google.oauth2 import service_account
 
-    key_dict = st.secrets["gcp_credentials"]
-    credentials = service_account.Credentials.from_service_account_info(key_dict)
-    return credentials
+#     key_dict = st.secrets["gcp_credentials"]
+#     credentials = service_account.Credentials.from_service_account_info(key_dict)
+#     return credentials
 
-# Get credentials
-creds = get_credentials()
+# # Get credentials
+# creds = get_credentials()
 
-# Create a storage client
-storage_client = storage.Client(project=project_id, credentials=creds)
+import streamlit as st
+from st_files_connection import FilesConnection
 
-def write_to_gcs(data):
-  """Writes data to a GCS bucket."""
+# Create connection object and retrieve file contents.
+# Specify input format is a csv and to cache the result for 600 seconds.
+conn = st.connection('gcs', type=FilesConnection)
+df = conn.read("streamlit-bucket/myfile.csv", input_format="csv", ttl=600)
 
-  bucket = storage_client.bucket(bucket_name)
-  blob = bucket.blob("your_file_name.txt")  # Replace with desired file name
+# Print results.
+for row in df.itertuples():
+    st.write(f"{row.Owner} has a :{row.Pet}:")
 
-  # Convert data to a string if necessary
-  data_str = str(data)
-
-  blob.upload_from_string(data_str)
-
-  st.success("Data written to GCS successfully!")
-data = pd.DataFrame([1,2,3],columns = ["A"])
-st.write(data)
-if st.button("Write to GCS"):
-    write_to_gcs(data)
