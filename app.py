@@ -14,7 +14,6 @@ credentials = service_account.Credentials.from_service_account_info(
 
 # Authorize the client using the credentials
 client = gspread.authorize(credentials)
-st.write(client)
 # Define the Google Sheet ID and URL for the CSV export
 sheet_id = '18jiBJagQ2ybfeTt4rUBnbuqZXPYjqaGz7KSSSjMvDis'
 csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
