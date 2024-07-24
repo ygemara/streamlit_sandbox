@@ -27,6 +27,6 @@ st.write(database_df)
 
 # Uncomment the following lines if you want to update the Google Sheet with the DataFrame content
 sheet_url = st.secrets["private_gsheets_url"]  # Ensure this secret is set in Streamlit secrets
-sheet = client.open_by_url(sheet_url).sheet1
+sheet = client.open_by_url(sheet_url).Sheet1
 sheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
 st.success('Data has been written to Google Sheets')
