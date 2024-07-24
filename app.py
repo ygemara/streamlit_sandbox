@@ -11,4 +11,4 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 df = conn.read()
 
 # Print results.
-st.write("Hello")
+st.write(df)
