@@ -40,5 +40,5 @@ sheet = client.open_by_url(sheet_url)
 worksheet = sheet.worksheet("Sheet1")  # Access the first sheet by name
 
 # Update the Google Sheet with the DataFrame content
-# worksheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
+worksheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
 st.success('Data has been written to Google Sheets')
