@@ -15,8 +15,9 @@ new_row = ["value1", "value2", "value3"]
 
 # Function to append data to Google Sheet
 def append_to_gsheet(connection, values):
-    sheet = conn.get_worksheet(0)  # assuming you want to write to the first sheet
-    sheet.append_row(values)
+    # Access the sheet object through the connection
+    sheet = connection.sheet  # Assuming connection has a sheet object
+    sheet.append_row(values)  # Append the row to the sheet
 
 # Button to trigger the append function
 if st.button('Append new row'):
