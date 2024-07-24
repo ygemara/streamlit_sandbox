@@ -26,7 +26,8 @@ database_df = pd.read_csv(csv_url, on_bad_lines='skip')
 st.write(database_df)
 
 # Uncomment the following lines if you want to update the Google Sheet with the DataFrame content
-sheet_url = st.secrets["private_gsheets_url"]  # Ensure this secret is set in Streamlit secrets
-sheet = client.open_by_url(sheet_url).Sheet1
-sheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
+sheet_url = st.secrets["private_gsheets_url"]["url"]  # Ensure this secret is set in Streamlit secrets
+sheet = client.open_by_url(sheet_url)
+worksheet = sheet.worksheet("Sheet1")  # Access the first sheet by name
+worksheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
 st.success('Data has been written to Google Sheets')
