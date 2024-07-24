@@ -2,12 +2,14 @@ import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
-creds_dict = st.secrets["gsheets"]
 # Define the scope
 
-if isinstance(creds_dict["private_key"], str):
-    creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
+creds_dict = dict(st.secrets["gsheets"])
 
+# Ensure private key has correct line breaks
+creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
+
+# Define the scope
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
 # Add credentials to the account
