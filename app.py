@@ -19,3 +19,26 @@ creds = get_credentials()
 
 # Create a storage client
 storage_client = storage.Client(project=project_id, credentials=creds)
+
+def write_to_gcs(data):
+  """Writes data to a GCS bucket."""
+
+  bucket = storage_client.bucket(bucket_name)
+  blob = bucket.blob("your_file_name.txt")  # Replace with desired file name
+
+  # Convert data to a string if necessary
+  data_str = str(data)
+
+  blob.upload_from_string(data_str)
+
+  st.success("Data written to GCS successfully!")
+
+def main():
+  # Example data
+  data = {"message": "Hello from Streamlit to GCP!"}
+
+  if st.button("Write to GCS"):
+    write_to_gcs(data)
+
+if __name__ == "__main__":
+  main()
