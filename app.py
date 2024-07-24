@@ -1,6 +1,6 @@
 import streamlit as st
 from google.cloud import storage
-
+st.write("Hello World")
 # Replace with your GCP project ID and bucket name
 project_id = "applied-groove-420014"
 bucket_name = "streamlit_bucket_yg"
