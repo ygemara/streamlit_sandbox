@@ -34,7 +34,7 @@ def write_to_gcs(data):
   blob.upload_from_string(data_str)
 
   st.success("Data written to GCS successfully!")
-data = pd.DataFrame([1,2,3],columns = ["A","B","C"])
+data = pd.DataFrame([1,2,3],columns = ["A"])
 st.write(data)
 if st.button("Write to GCS"):
     write_to_gcs(data)
