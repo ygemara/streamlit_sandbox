@@ -8,3 +8,4 @@ pandas
 datetime
 gcsfs
 st-files-connection
+gspread
