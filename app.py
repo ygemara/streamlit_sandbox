@@ -1,5 +1,7 @@
 import streamlit as st
+import pandas as pd
 from google.cloud import storage
+
 st.write("Hello World")
 # Replace with your GCP project ID and bucket name
 project_id = "applied-groove-420014"
@@ -32,13 +34,7 @@ def write_to_gcs(data):
   blob.upload_from_string(data_str)
 
   st.success("Data written to GCS successfully!")
-
-def main():
-  # Example data
-  data = {"message": "Hello from Streamlit to GCP!"}
-
-  if st.button("Write to GCS"):
+data = pd.DataFrame([1,2,3],columns = ["A","B","C"])
+st.write(data)
+if st.button("Write to GCS"):
     write_to_gcs(data)
-
-if __name__ == "__main__":
-  main()
