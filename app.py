@@ -24,11 +24,11 @@ database_df = pd.read_csv(csv_url, on_bad_lines='skip')
 
 # Add additional rows to the DataFrame
 additional_data = {
-    'Column1': ['New Data 1', 'New Data 2', 'New Data 3'],
-    'Column2': ['More Data 1', 'More Data 2', 'More Data 3'],
-    'Column3': ['Extra Data 1', 'Extra Data 2', 'Extra Data 3'],
-    'Column4': ['Additional Data 1', 'Additional Data 2', 'Additional Data 3'],
-    'Column5': ['Further Data 1', 'Further Data 2', 'Further Data 3']
+    'Col 1': ['New Data 1', 'New Data 2', 'New Data 3'],
+    'Col 2': ['More Data 1', 'More Data 2', 'More Data 3'],
+    'Col 3': ['Extra Data 1', 'Extra Data 2', 'Extra Data 3'],
+    'Col 4': ['Additional Data 1', 'Additional Data 2', 'Additional Data 3'],
+    'Col 5': ['Further Data 1', 'Further Data 2', 'Further Data 3']
 }
 additional_df = pd.DataFrame(additional_data)
 
