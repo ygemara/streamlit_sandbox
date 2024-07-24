@@ -20,15 +20,25 @@ csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
 
 # Read the CSV data into a DataFrame
 database_df = pd.read_csv(csv_url, on_bad_lines='skip')
+# Add additional rows to the DataFrame
+additional_data = {
+    'Column1': ['New Data 1', 'New Data 2', 'New Data 3'],
+    'Column2': ['More Data 1', 'More Data 2', 'More Data 3'],
+    # Add more columns as needed
+}
+additional_df = pd.DataFrame(additional_data)
 
-# Display the DataFrame in the Streamlit app
+# Concatenate the original DataFrame with the additional rows
+database_df = pd.concat([database_df, additional_df], ignore_index=True)
+
+# Display the updated DataFrame in the Streamlit app
 st.write(database_df)
 
 # Read the Google Sheets URL from Streamlit secrets
 sheet_url = st.secrets["private_gsheets_url"]  # Ensure this secret is set in Streamlit secrets
-
-sheet = client.open_by_key(sheet_id)
-st.write(sheet)
+sheet = client.open_by_url(sheet_url)
 worksheet = sheet.worksheet("Sheet1")  # Access the first sheet by name
-worksheet.update(["A","B","C"])
+
+# Update the Google Sheet with the DataFrame content
+worksheet.update([database_df.columns.values.tolist()] + database_df.values.tolist())
 st.success('Data has been written to Google Sheets')
