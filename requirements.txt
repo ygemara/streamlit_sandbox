@@ -10,4 +10,4 @@ gcsfs
 gspread
 oauth2client
 st-gsheets-connection
-streamlit-gsheets
+git+https://github.com/streamlit/gsheets-connection
