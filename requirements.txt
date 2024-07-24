@@ -9,3 +9,4 @@ datetime
 gcsfs
 gspread
 oauth2client
+streamlit_gsheets
