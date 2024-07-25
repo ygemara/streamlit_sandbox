@@ -3,6 +3,9 @@ import pandas as pd
 import gspread
 from google.oauth2 import service_account
 
+st.write(st.secrets.keys())
+
+
 # Create a connection object using credentials from Streamlit secrets.
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
