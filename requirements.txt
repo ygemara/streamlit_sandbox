@@ -1,6 +1,6 @@
 streamlit
 numpy
-pandas
+pandas==2.2.2
 datetime
 gspread
 oauth2client
