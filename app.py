@@ -16,7 +16,7 @@ credentials = service_account.Credentials.from_service_account_info(
 client = gspread.authorize(credentials)
 
 # Define the Google Sheet ID and URL for the CSV export
-sheet_id = '18jiBJagQ2ybfeTt4rUBnbuqZXPYjqaGz7KSSSjMvDis'
+sheet_id = st.secrets["sheet_id"]
 csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
 
 # Read the CSV data into a DataFrame
@@ -46,15 +46,12 @@ worksheet = sheet.worksheet("Sheet1")  # Access the first sheet by name
 # Verify that the column headers match
 google_sheet_headers = worksheet.row_values(1)
 dataframe_headers = database_df.columns.tolist()
-
+st.write("hello")
 if google_sheet_headers != dataframe_headers:
     st.error("Column headers do not match!")
 else:
     # Convert DataFrame to a list of lists for updating Google Sheets
     data = [dataframe_headers] + database_df.values.tolist()
-
-    # Debugging: Display the data structure to be uploaded
-    st.write(data)
 
     # Try updating the worksheet with the DataFrame content
     try:
