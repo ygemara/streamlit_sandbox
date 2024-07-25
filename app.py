@@ -3,13 +3,12 @@ import pandas as pd
 import gspread
 from google.oauth2 import service_account
 
-# Create a connection object using credentials from Streamlit secrets.
 credentials = service_account.Credentials.from_service_account_info(
-  st.secrets["gcp_service_account"],
-  scopes=[
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
-  ],
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
 )
 
 # Authorize the client using the credentials
